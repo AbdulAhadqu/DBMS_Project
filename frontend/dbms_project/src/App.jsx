@@ -4,12 +4,22 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Table from './assets/components/table';
 import Select from './assets/components/select_comp';
-import './app.css'
+import AddNewRecord from './assets/components/AddnNewRecord';
+import './app.css';
 
 function App() {
   
   const [data, setdata]= useState([]);
   const [table ,setTable]= useState('books');
+  
+  console.log (data)
+  useEffect (()=>{
+    fetch (`http://localhost:8000/${table}`)
+    .then( res => res.json())
+    .then( data=> setdata([...data]))
+    .catch(err =>console.log(err) )
+  },[table])
+  
   let primarykey;
   if (table=='books')
   {
@@ -22,32 +32,23 @@ function App() {
     primarykey='order_id'
   }
 
-  // const [editable , seteditable ] = useState (true);
-  console.log (data)
-  useEffect (()=>{
-    fetch (`http://localhost:8000/${table}`)
-    .then( res => res.json())
-    .then( data=> setdata([...data]))
-    .catch(err =>console.log(err) )
-  },[table])
-  
   function handleOptionChange (event){
-      // event.preventDefault();
       setTable(event.target.value);
   }
 
-  const handleUpdate = (updatedRow) => {
-    fetch(`http://localhost:8000/${table}/${updatedRow.id}`, {
+
+  const handleSave = (updatedRow, bodyData) => {
+    fetch(`http://localhost:8000/${table}/${updatedRow[primarykey]}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(updatedRow),
+      body: JSON.stringify(bodyData),
     })
       .then((res) => res.json())
       .then(() => {
         setdata((prev) =>
-          prev.map((row) => (row.id === updatedRow.id ? updatedRow : row))
+          prev.map((row) => (row === updatedRow ? {...updatedRow,...bodyData} : row))
         );
       })
       .catch((err) => console.log('Update error:', err));
@@ -72,12 +73,14 @@ function App() {
   return (
     <div>
       <Select handleOptionChange={handleOptionChange}/>
-      <Table data={data} handleDelete={handleDelete}/>
+      {data.length > 0 && table !== 'orders' && (
+        <AddNewRecord element={data[0]} primarykey={primarykey} />
+      )}
+
+      <Table data={data} handleDelete={handleDelete} handleSave={handleSave} />
     </div>
   )
 }
-
-
 
 export default App
 

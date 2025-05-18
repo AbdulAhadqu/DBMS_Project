@@ -78,16 +78,24 @@ app.put('/:table/:id', (req, res) => {
   
   const fields = Object.keys(data);
   const values = Object.values(data);
-  
-
-
   if (!fields.length) {
     return res.status(400).json({ error: 'No fields provided to update.' });
   }
 
+  let primarykey;
+  if (table=='books')
+  {
+    primarykey = 'book_id';
+  }
+  else if (table =='customers'){
+    primarykey= 'customer_id';
+  }
+  else{
+    primarykey='order_id';}
+
   const setClause = fields.map(field => `${field} = ?`).join(', ');
 
-  const query = `UPDATE ?? SET ${setClause} WHERE id = ?`;
+  const query = `UPDATE ?? SET ${setClause} WHERE ${primarykey} = ?`;
   db.query(query, [table, ...values, id], (err, result) => {
     if (err) return res.status(500).json({ error: err });
     return res.json({ message: `Record in ${table} updated successfully`, result });
@@ -98,26 +106,28 @@ app.delete ('/:table/:id' ,(req, res)=>{
     const table = req.params.table;
     const id = req.params.id;
     
-    // const query= 'DELETE FROM ?? WHERE book_id= ?';
+    let primarykey;
+  if (table=='books')
+  {
+    primarykey = 'book_id';
+  }
+  else if (table =='customers'){
+    primarykey= 'customer_id';
+  }
+  else{
+    primarykey='order_id';
+    const deleteBook = `DELETE FROM ${table} WHERE ${primarykey} = ?`;
+    db.query(deleteBook, [id], (err2, result2) => {
+        if (err2) return res.status(500).json({ error: err2 });
+        res.json({ message: `Book and related orders deleted`, result: result2 });
+    });
+  }
 
-    // console.log("Attempting to delete from table:", table, "where id =", id);
-
-    
-    // db.query(query,[table,id] , (err,result)=>{
-    //     if(err) return res.status(500).json ({error:err})
-    //     if (result.affectedRows === 0) {
-    //     return res.status(404).json({ message: 'Record not found' });
-    //     }
-    //     return res.json ({message:`Record in ${table} successfully deleted at id : ${id}`,result})
-    // })
-
-    // First delete from orders where book_id = ?
-    const deleteOrders = 'DELETE FROM orders WHERE book_id = ?';
+    const deleteOrders = `DELETE FROM orders WHERE ${primarykey} = ?`;
     db.query(deleteOrders, [id], (err, result) => {
       if (err) return res.status(500).json({ error: err });
 
-    // Then delete from books
-    const deleteBook = 'DELETE FROM books WHERE book_id = ?';
+    const deleteBook = `DELETE FROM ${table} WHERE ${primarykey} = ?`;
     db.query(deleteBook, [id], (err2, result2) => {
         if (err2) return res.status(500).json({ error: err2 });
         res.json({ message: `Book and related orders deleted`, result: result2 });
