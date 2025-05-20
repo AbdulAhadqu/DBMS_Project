@@ -65,16 +65,27 @@ return (
           inputType = 'date'; 
         } else if (typeof value === 'boolean') {
           inputType = 'checkbox';
+        }else if (key == 'email'){
+          inputType= 'email';
+        }
+        else if (key == 'phone'){
+          inputType='tel';
         }
 
         return (
           <td key={ind}>
-            <input
+            {ind !== 0 ?(
+              <input
+              inert= {ind==0}
               type={inputType}
               defaultValue={inputType === 'checkbox' ? undefined : value}
               checked={inputType === 'checkbox' ? value : undefined}
               onChange={(e) => handleInputChange(key, e, inputType)}
             />
+          ):(
+            <span>{value}</span>
+          )}
+            
           </td>
         );
       })}

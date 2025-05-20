@@ -1,5 +1,14 @@
+body {
+    background-image: url('./images/fondodepantalla.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+tr th {
+    text-transform: capitalize;
+}
 tr td , th{
-    border:2px solid black;
+    border:1px solid black;
     padding: 1rem;
     margin: 1rem;
     max-width: 100%;
@@ -13,8 +22,53 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
+    margin-block: 1rem;
 }
 form  input{
     margin-block: 0.5rem;
  }
+
+form label {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    display: 'block'; 
+    margin-bottom: '1rem';
+}
+
+form span {
+    text-transform:capitalize;
+}
+
+.upper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1.5rem;
+}
+.upper select {
+    padding: 1rem;
+    width: 100%;
+    outline: none;
+    border-radius: 8px;
+
+}
+.upper select option{
+    text-transform: capitalize;
+}
+.upper button{
+    padding: 1rem;
+    outline: none;
+    border-radius: 8px;
+    border: 1px solid gray;
+    background-color: white;
+}
+.container{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2rem;
+    padding: 0.5rem;
+}

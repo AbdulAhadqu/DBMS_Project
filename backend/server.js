@@ -23,7 +23,11 @@ console.log('✅ Connected to MySQL database');
 });
 
 app.get('/', (req, res) => {
-return res.json({ message: 'Hey Backend !!!' });
+const query =   `SHOW TABLES;`;
+db.query (query , (err, result)=>{
+  if (err) return res.status(400).json({error :err})
+  return res.json (result);
+})
 });
 
 app.get('/:table', (req, res) => {
@@ -37,61 +41,28 @@ app.get('/:table', (req, res) => {
   });
 });
 
-
-// app.get('/books', (req, res) => {
-// const query = 'SELECT * FROM Books';
-// db.query(query, (err, data) => {
-// if (err) {
-// console.error('Query error:', err.message);
-// return res.status(500).json({ error: err.message });
-// }
-// return res.json(data);
-// });
-// });
-
-// app.get('/customers', (req, res) => {
-// const query = 'SELECT * FROM customers';
-// db.query(query, (err, data) => {
-// if (err) {
-// console.error('Query error:', err.message);
-// return res.status(500).json({ error: err.message });
-// }
-// return res.json(data);
-// });
-// });
-
-// app.get('/orders', (req, res) => {
-// const query = 'SELECT * FROM orders';
-// db.query(query, (err, data) => {
-// if (err) {
-// console.error('Query error:', err.message);
-// return res.status(500).json({ error: err.message });
-// }
-// return res.json(data);
-// });
-// });
-
-app.put('/:table/:id', (req, res) => {
+app.put('/:table/:primary_key/:id', (req, res) => {
   const table = req.params.table;
   const id = req.params.id;
   const data = req.body;
-  
+  const primarykey = req.params.primary_key;
+
   const fields = Object.keys(data);
   const values = Object.values(data);
   if (!fields.length) {
     return res.status(400).json({ error: 'No fields provided to update.' });
   }
 
-  let primarykey;
-  if (table=='books')
-  {
-    primarykey = 'book_id';
-  }
-  else if (table =='customers'){
-    primarykey= 'customer_id';
-  }
-  else{
-    primarykey='order_id';}
+  // let primarykey;
+  // if (table=='books')
+  // {
+  //   primarykey = 'book_id';
+  // }
+  // else if (table =='customers'){
+  //   primarykey= 'customer_id';
+  // }
+  // else{
+  //   primarykey='order_id';}
 
   const setClause = fields.map(field => `${field} = ?`).join(', ');
 
@@ -102,26 +73,30 @@ app.put('/:table/:id', (req, res) => {
   });
 });
 
-app.delete ('/:table/:id' ,(req, res)=>{
+app.delete ('/:table/:primary_key/:id' ,(req, res)=>{
     const table = req.params.table;
     const id = req.params.id;
+    const primarykey = req.params.primary_key;
     
-    let primarykey;
-  if (table=='books')
-  {
-    primarykey = 'book_id';
-  }
-  else if (table =='customers'){
-    primarykey= 'customer_id';
-  }
-  else{
-    primarykey='order_id';
-    const deleteBook = `DELETE FROM ${table} WHERE ${primarykey} = ?`;
-    db.query(deleteBook, [id], (err2, result2) => {
-        if (err2) return res.status(500).json({ error: err2 });
-        res.json({ message: `Book and related orders deleted`, result: result2 });
-    });
-  }
+  //   let primarykey;
+  // if (table=='books')
+  // {
+  //   primarykey = 'book_id';
+  // }
+  // else if (table =='customers'){
+  //   primarykey= 'customer_id';
+  // }
+  // else{
+  //   primarykey='order_id';
+  //   const query = `DELETE FROM ${table} WHERE ${primarykey} = ?`;
+  //   db.query(query, [id], (err2, result2) => {
+  //       if (err2) return res.status(500).json({ error: err2 });
+  //       if (result2.affectedRows === 0) {
+  //       return res.status(404).json({ message: 'Not found' });
+  //   }
+  //       res.json({ message: `Book and related orders deleted`, result: result2 });
+  //   });
+  // }
 
     const deleteOrders = `DELETE FROM orders WHERE ${primarykey} = ?`;
     db.query(deleteOrders, [id], (err, result) => {
