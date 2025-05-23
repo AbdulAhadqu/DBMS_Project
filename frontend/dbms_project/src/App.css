@@ -1,5 +1,133 @@
-tr td , th{
-    border:2px solid black;
-    padding: 1rem;
+*{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-image: url('./assets/images/fondodepantalla.jpg');
+    background-position: center;
+    background-size: cover;
+    
+}
+table{
+    width: 100% !important;
+  /* border-collapse: collapse; */
+  min-width: 600px;
+}
+.tableContainer {
+    width: 95vw;
+    overflow-x: auto;
+
+}
+
+@media (max-width : 786px){
+    .tableContainer {
+        width: 100%;
+        overflow-x: scroll;
+    }
+}
+tr th {
+    text-transform: capitalize;
+    overflow-wrap: break-word;
+}
+tr td, th {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 0.5rem;
     margin: 1rem;
+    max-width: 100%;
+    text-align: center;
+    white-space: nowrap; /* prevents wrapping */
+
+}
+
+tr td >input{
+width: 100%;
+}
+tr td button{
+    border: 1px solid black;
+    background-color: #E6DCDF;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+
+}
+form {
+    width: 22rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-block: 1rem;
+    
+}
+form  input{
+    margin-block: 0.5rem;
+    border: 2px solid#E6DCDF;
+    padding: 0.5rem;
+    border-radius: 8px;
+    outline: none;
+    width: 100%;
+ }
+
+form label {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-bottom: '1rem';
+    width: 100%;
+}
+
+form span {
+    text-transform:capitalize;
+    font-size: 1.1rem;
+}
+form div{
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: end ;
+    align-items: center;
+}
+.upper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    row-gap: 1rem;
+    margin: 1.5rem;
+    width: 100%;
+}
+.upper select {
+    padding: 1rem;
+    width: 15rem;
+    outline: none;
+    border-radius: 8px;
+    border: 2px solid #E6DCDF;
+    font-size: medium;
+    color: gray;
+    
+}
+.upper select option{
+    text-transform: capitalize;
+}
+
+.upper button{
+    padding: 1rem;
+    outline: none;
+    border-radius: 8px;
+    border: 2px solid #E6DCDF;
+    background-color: white;
+    width: 15rem;
+    color: gray;
+    font-size: medium;
+}
+.container{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 }
