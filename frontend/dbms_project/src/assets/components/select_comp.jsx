@@ -1,17 +1,22 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {toast} from 'react-toastify';
 
 function Select({handleOptionChange}) {
   const [table, setTable] = useState ([]);
   useEffect ( ()=>{
-   fetch (`http://localhost:8000`)
+   fetch (`http://localhost:8000/table`)
    .then (res => res.json())
-   .then ( data => setTable([...data]))
-   .catch (err => console.error (err))
+   .then ( data => {setTable([...data])
+   })
+   .catch (err => {
+    console.error (err)})
   }, [])
+  table.length<0 && toast.warning("No Table Found!!!");
   console.log(table)
   return (
+    <>
     <div>
       
       <select onChange={ (e)=> handleOptionChange(e)}>
@@ -27,7 +32,9 @@ function Select({handleOptionChange}) {
         }
         
       </select>
+      
     </div>
+    </>
   )
 }
 

@@ -12,9 +12,10 @@ function Table({data,handleDelete,handleSave}) {
           {data.length > 0 && (
           <tr>
           {Object.keys(data[0]).map((key,index) => (
-          <th key={index}>{key}</th>
+          <th key={index}>{key.replace("_", " ")}</th>
           ))}
-            <th colSpan={2}>Action</th>
+          {Object.keys(data[0])[0] !== 'Tables_in_library' &&
+            <th colSpan={2}>Action</th>}
           </tr>
           )}
         </thead>

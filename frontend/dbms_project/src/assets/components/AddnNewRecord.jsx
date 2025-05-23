@@ -1,4 +1,6 @@
 import React, { useState,useEffect } from 'react';
+import Modal from './Modal';
+
 function AddNewRecord({element,primarykey,onSubmitToParent}) {
     const [data, setdata] = useState({});
     const [record , setRecord]= useState({});
@@ -13,6 +15,7 @@ function AddNewRecord({element,primarykey,onSubmitToParent}) {
          setdata({});
         
       }
+      setModal(true)
     }, [data, onSubmitToParent]);
 
 
@@ -24,14 +27,16 @@ function AddNewRecord({element,primarykey,onSubmitToParent}) {
   e.preventDefault();
   setdata(record);
   setRecord({})
+  toggle ()
     }
 
 
   return (
     <div>
-      <button style={{display:modal?'none':'block'}} onClick={toggle}>Add Record</button>
-     
-        <form onSubmit={handleSubmit}>
+
+     <Modal title={"Add Record"}>
+      {
+         <form onSubmit={handleSubmit}>
        {
            Object.entries(element).filter (([key,_])=> key!== primarykey ).map(([key,value],index)=>{
                let inputType = 'text';
@@ -46,7 +51,7 @@ function AddNewRecord({element,primarykey,onSubmitToParent}) {
                }
                return(
                <label key={index} htmlFor={key}>
-                  <span>{`${key}:`}</span> 
+                  <span>{`${key.replace('_', "  ")}:`}</span> 
                    <input 
                    type={inputType} 
                    name={key}
@@ -58,9 +63,14 @@ function AddNewRecord({element,primarykey,onSubmitToParent}) {
                 );
 })
         }
+        <div className="aligning_div">
+        <button type='button' onClick={toggle}>Cancel</button>
         <button type='submit' >Submit</button>
-      </form>
 
+        </div>
+      </form>
+      }
+      </Modal>
     </div>
   )
 }

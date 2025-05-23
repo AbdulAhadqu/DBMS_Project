@@ -62,7 +62,7 @@ return (
         if (typeof value === 'number') {
           inputType = 'number'; 
         }  else if (typeof value === 'string' && !isNaN(Date.parse(value))) {
-          inputType = 'date'; 
+          inputType = 'datetime-local'; 
         } else if (typeof value === 'boolean') {
           inputType = 'checkbox';
         }else if (key == 'email'){
@@ -98,8 +98,9 @@ return (
         <button onClick={() => handleDelete(element)}>Delete</button>
       </td>
     </tr>
-  ) : (
-    <tr>
+  ) : (<tr>
+  {Object.keys(element)[0] !== 'Tables_in_library' ? (
+    <>
       {Object.values(element).map((value, ind) => (
         <td key={ind}>{value?.toString()}</td>
       ))}
@@ -109,9 +110,12 @@ return (
       <td>
         <button onClick={() => handleDelete(element)}>Delete</button>
       </td>
-    </tr>
+    </>
+  ) : null
+  }
+</tr>)
   )
-);
+
 
 
 
