@@ -10,26 +10,26 @@ app.use(express.json());
 const db = mysql.createConnection({
 host: 'localhost',
 user: 'root',
-password: '',
-database: '',
+password: 'Ahad@1814',
+database: 'university_db',
 timezone:'Z'
 });
+
+async function execute(){
+const [rows]=await db.execute('SHOW DATABASES');
+document.writeln(rows)
+}
+
 
 db.connect((err) => {
 if (err) {
 console.error('❌ MySQL connection error:', err.message);
 return;
 }
-console.log('✅ Connected to MySQL database');
+console.log('✅ Connected to MySQL database' );
 });
 
-app.get('/db', (req, res) => {
-const query =   `SHOW DATABASES;`;
-db.query (query , (err, result)=>{
-  if (err) return res.status(400).json({error :err})
-  return res.json (result);
-})
-});
+
 
 app.get('/table', (req, res) => {
 const query =   `SHOW TABLES;`;
@@ -83,16 +83,7 @@ app.put('/:table/:primary_key/:id', (req, res) => {
     return res.status(400).json({ error: 'No fields provided to update.' });
   }
 
-  // let primarykey;
-  // if (table=='books')
-  // {
-  //   primarykey = 'book_id';
-  // }
-  // else if (table =='customers'){
-  //   primarykey= 'customer_id';
-  // }
-  // else{
-  //   primarykey='order_id';}
+
 
   const setClause = fields.map(field => `${field} = ?`).join(', ');
 

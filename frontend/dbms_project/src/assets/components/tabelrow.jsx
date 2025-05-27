@@ -91,7 +91,7 @@ return (
       })}
       <td>
         <button onClick={() => {seteditable(false)
-          handleSave(element,notNullObject(alteredData));
+        Object.entries(notNullObject(alteredData)).length>0 && handleSave(element,notNullObject(alteredData));
         }}>Save</button>
       </td>
       <td>

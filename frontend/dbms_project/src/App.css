@@ -10,39 +10,50 @@ body {
     background-size: cover;
     
 }
-table{
-    width: 100% !important;
-  /* border-collapse: collapse; */
-  min-width: 600px;
-}
 .tableContainer {
     width: 95vw;
     overflow-x: auto;
+    padding-inline: 5px;
 
 }
-
-@media (max-width : 786px){
-    .tableContainer {
-        width: 100%;
-        overflow-x: scroll;
-    }
+table{
+    width: 100% !important;
+    min-width: 600px;
 }
-tr th {
+table thead tr >th {
+    background-color:#E6DCDF ;
+    border: 1px solid black;
+    border-top-left-radius: 8px;
+    border-top-right-radius:8px ;
+    padding: 0.5rem;
+    transition: all ease-in 0.1s;
+}
+table tbody :hover {
+    transform: scale(1.005);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+;
+}
+table tr {
+    background-color: white;
+    border: 2px solid black !important;
+}
+
+tr >th {
     text-transform: capitalize;
     overflow-wrap: break-word;
 }
-tr td, th {
+tr >td {
     border: 1px solid black;
     border-radius: 8px;
     padding: 0.5rem;
     margin: 1rem;
     max-width: 100%;
     text-align: center;
-    white-space: nowrap; /* prevents wrapping */
+    white-space: nowrap;
 
 }
 
-tr td >input{
+tr >td >input{
 width: 100%;
 }
 tr td button{
@@ -54,7 +65,7 @@ tr td button{
 
 }
 form {
-    width: 22rem;
+    /* width: 22rem; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,6 +73,7 @@ form {
     margin-block: 1rem;
     
 }
+
 form  input{
     margin-block: 0.5rem;
     border: 2px solid#E6DCDF;
@@ -130,4 +142,10 @@ form div{
     justify-content: center;
     align-items: center;
     padding: 1rem;
+}
+@media (max-width : 786px){
+    .tableContainer {
+        width: 100%;
+        overflow-x: scroll;
+    }
 }
