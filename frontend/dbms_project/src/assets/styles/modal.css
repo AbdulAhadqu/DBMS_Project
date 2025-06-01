@@ -6,9 +6,30 @@ body.active-modal {
 .btn-modal {
     padding: 10px 20px;
     display: block;
-    /* margin: 100px auto 0; */
     font-size: 18px;
 }
+.btn-modal {
+  border: 2px solid white	;
+  background-color: #7a6480;
+  color: white	;
+  border-radius: 5px;
+  padding: 8px 8px;
+}
+
+.btn-modal:hover {
+    border: 2px solid #7a6480;
+    background-color: white;
+    color: 	#7a6480;
+    transform: scale(1.02);
+
+}
+.btn-modal:active {
+    background-color:#7a6480;
+    color: white;
+    transform: scale(0.9);
+    transition: ease-in-out 0.2s;
+}
+
 
 .modal, .overlay {
     width: 100vw;
@@ -25,25 +46,25 @@ body.active-modal {
 }
 .modal-content {
     position: absolute;
-    /* width: 34vw; */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
     background: #f1f1f1;
-    padding: 25px 28px 20px 28px;
+    padding: 20px 28px 20px 28px;
     border-radius: 3px;
     max-width: 400px;
-    min-width: 220px;
-    max-height: 80vh;
+    min-width: 400px ;
+    max-height: 85vh;
     overflow-y: auto;
     scrollbar-width: thin;
 }
+
 .modal-content h1 {
     margin-top:1rem;
 
 }
-@media (max-width:400px) {
+@media (max-width:550px) {
     .modal-content{
         min-width: 100%;
     }

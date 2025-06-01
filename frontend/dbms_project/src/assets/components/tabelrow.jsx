@@ -90,12 +90,12 @@ return (
         );
       })}
       <td>
-        <button onClick={() => {seteditable(false)
+        <button className='tableRowBtn' onClick={() => {seteditable(false)
         Object.entries(notNullObject(alteredData)).length>0 && handleSave(element,notNullObject(alteredData));
         }}>Save</button>
       </td>
       <td>
-        <button onClick={() => handleDelete(element)}>Delete</button>
+        <button className='tableRowBtn' onClick={() => handleDelete(element)}>Delete</button>
       </td>
     </tr>
   ) : (<tr>
@@ -105,10 +105,10 @@ return (
         <td key={ind}>{value?.toString()}</td>
       ))}
       <td>
-        <button onClick={() => seteditable(true)}>Edit</button>
+        <button className='tableRowBtn' onClick={() => seteditable(true)}>Edit</button>
       </td>
       <td>
-        <button onClick={() => handleDelete(element)}>Delete</button>
+        <button className='tableRowBtn' onClick={() => handleDelete(element)}>Delete</button>
       </td>
     </>
   ) : null
