@@ -4,9 +4,9 @@ import Modal from './Modal';
 function AddNewRecord({element,primarykey,onSubmitToParent}) {
     const [data, setdata] = useState({});
     const [record , setRecord]= useState({});
-    const [modal, setModal] = useState(true);
+    // const [modal, setModal] = useState(true);
 
-  const toggle = () => setModal(!modal);
+  // const toggle = () => setModal(!modal);
 
     useEffect(() => {
       if (Object.keys(data).length > 0) {
@@ -15,7 +15,7 @@ function AddNewRecord({element,primarykey,onSubmitToParent}) {
          setdata({});
         
       }
-      setModal(true)
+      // setModal(true)
     }, [data, onSubmitToParent]);
 
 
@@ -26,8 +26,8 @@ function AddNewRecord({element,primarykey,onSubmitToParent}) {
     function handleSubmit(e) {
   e.preventDefault();
   setdata(record);
-  setRecord({})
-  toggle ()
+  setRecord()
+  // toggle ()
     }
 
 
@@ -64,8 +64,8 @@ function AddNewRecord({element,primarykey,onSubmitToParent}) {
 })
         }
         <div className="aligning_div">
-        <button type='button' onClick={toggle}>Cancel</button>
-        <button type='submit' >Submit</button>
+        {/* <button type='button' onClick={toggle}>Cancel</button> */}
+        <button type='submit' className='submit' >Submit</button>
 
         </div>
       </form>

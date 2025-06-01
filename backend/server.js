@@ -10,8 +10,8 @@ app.use(express.json());
 const db = mysql.createConnection({
 host: 'localhost',
 user: 'root',
-password: '',
-database: '',
+password: 'Ahad@1814',
+database: 'ecommerce_db',
 timezone:'Z'
 });
 
@@ -20,16 +20,10 @@ if (err) {
 console.error('❌ MySQL connection error:', err.message);
 return;
 }
-console.log('✅ Connected to MySQL database');
+console.log('✅ Connected to MySQL database' );
 });
 
-app.get('/db', (req, res) => {
-const query =   `SHOW DATABASES;`;
-db.query (query , (err, result)=>{
-  if (err) return res.status(400).json({error :err})
-  return res.json (result);
-})
-});
+
 
 app.get('/table', (req, res) => {
 const query =   `SHOW TABLES;`;
@@ -82,18 +76,6 @@ app.put('/:table/:primary_key/:id', (req, res) => {
   if (!fields.length) {
     return res.status(400).json({ error: 'No fields provided to update.' });
   }
-
-  // let primarykey;
-  // if (table=='books')
-  // {
-  //   primarykey = 'book_id';
-  // }
-  // else if (table =='customers'){
-  //   primarykey= 'customer_id';
-  // }
-  // else{
-  //   primarykey='order_id';}
-
   const setClause = fields.map(field => `${field} = ?`).join(', ');
 
   const query = `UPDATE ?? SET ${setClause} WHERE ${primarykey} = ?`;
@@ -107,31 +89,6 @@ app.delete ('/:table/:primary_key/:id' ,(req, res)=>{
     const table = req.params.table;
     const id = req.params.id;
     const primarykey = req.params.primary_key;
-    
-  //   let primarykey;
-  // if (table=='books')
-  // {
-  //   primarykey = 'book_id';
-  // }
-  // else if (table =='customers'){
-  //   primarykey= 'customer_id';
-  // }
-  // else{
-  //   primarykey='order_id';
-  //   const query = `DELETE FROM ${table} WHERE ${primarykey} = ?`;
-  //   db.query(query, [id], (err2, result2) => {
-  //       if (err2) return res.status(500).json({ error: err2 });
-  //       if (result2.affectedRows === 0) {
-  //       return res.status(404).json({ message: 'Not found' });
-  //   }
-  //       res.json({ message: `Book and related orders deleted`, result: result2 });
-  //   });
-  // }
-
-//     const deleteOrders = `DELETE FROM orders WHERE ${primarykey} = ?`;
-//     db.query(deleteOrders, [id], (err, result) => {
-//       if (err) return res.status(500).json({ error: err });
-// });
     const deleteBook = `DELETE FROM ${table} WHERE ${primarykey} = ?`;
     db.query(deleteBook, [id], (err2, result2) => {
         if (err2) return res.status(500).json({ error: err2 });

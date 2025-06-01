@@ -6,6 +6,7 @@ import Table from './assets/components/table';
 import Select from './assets/components/select_comp';
 import AddNewRecord from './assets/components/AddnNewRecord';
 import { ToastContainer, toast } from 'react-toastify';
+import LoginPage from './assets/components/LoginPage';
 import './app.css';
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
   const [data, setdata]= useState([]);
   const [table ,setTable]= useState('');
   const [postdata, setpostdata]= useState ({});
-  const [primaryKey, setPrimaryKey] =useState ('')
+  const [primaryKey, setPrimaryKey] =useState ('');
+  const [LoggedIn, setLoggedIn] = useState(true);
   
   console.log (data)
   useEffect (()=>{
@@ -24,13 +26,23 @@ function App() {
       setPrimaryKey(Object.keys (data[0])[0]);
     })
     .catch(err =>console.log(err) )
-      
   },[table,postdata])
+  
+  useEffect(() => {
+  if (sessionStorage.getItem('user@ex') === '123456') {
+    toast.success('✅ Logged In from session!');
+    setLoggedIn(false);  
+  }
+}, []);
 
   function handleOptionChange (event){
       setTable(event.target.value);
   }
 
+   function handleLoggedIn (){
+    setLoggedIn(login => !login);
+
+  }
    function onSubmitToParent(data) {
   fetch(`http://localhost:8000/${table}`, {
     method: "POST",
@@ -97,6 +109,11 @@ function App() {
   }
   
   return (
+    LoggedIn 
+    ?
+    <LoginPage handleLoggedIn={handleLoggedIn} />
+    :
+    <>
     <div className='container'>
       <ToastContainer/>
       <div className="upper">
@@ -114,6 +131,8 @@ function App() {
         <h1 >No Records Available</h1>
       </div>)}
     </div>
+    </>
+    
   )
 }
 

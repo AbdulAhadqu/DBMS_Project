@@ -1,60 +1,101 @@
 *{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-body {
-    background-image: url('./assets/images/fondodepantalla.jpg');
-    background-position: center;
-    background-size: cover;
     
 }
-table{
-    width: 100% !important;
-  /* border-collapse: collapse; */
-  min-width: 600px;
+
+ body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #20002c, #cbb4d4);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
+
 .tableContainer {
     width: 95vw;
     overflow-x: auto;
-
+    border: 3px solid #cbb4d4;
+    /* padding-inline: 0.8rem; */
+    padding: 1rem;
+    border-radius: 20px;
+    background-color: white;
+}
+/* Table Structure */
+table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  border-radius: 10px;
 }
 
-@media (max-width : 786px){
-    .tableContainer {
-        width: 100%;
-        overflow-x: scroll;
-    }
+th{
+  border-bottom: 3px solid #dcdcdc	;
+  border-right: 3px solid #dcdcdc	;
+  padding-block: 1rem;
+  text-align: center;
+  text-transform: capitalize;
 }
-tr th {
-    text-transform: capitalize;
-    overflow-wrap: break-word;
-}
-tr td, th {
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 0.5rem;
-    margin: 1rem;
-    max-width: 100%;
-    text-align: center;
-    white-space: nowrap; /* prevents wrapping */
-
+ td {
+  border-top: 3px solid #dcdcdc	;
+  border-bottom: 3px solid #dcdcdc	;
+  border-right: 3px solid #dcdcdc	;
+  padding: 0.6rem;
+  text-align: center;
 }
 
-tr td >input{
-width: 100%;
+tr > th:first-child,
+tr > td:first-child {
+  border-right: 3px solid #dcdcdc	;
 }
-tr td button{
-    border: 1px solid black;
-    background-color: #E6DCDF;
-    color: black;
-    border-radius: 5px;
-    padding: 5px;
 
+tr > th:last-child,
+tr > td:last-child {
+  border-left: 3px solid #dcdcdc;
+  border-right: none !important;
+}
+thead {
+  /* background-color: #f0f0f0; */
+  color: #7a6480;
+}
+
+tbody tr {
+  background-color: white;
+  color: #7a6480		;
+}
+
+td input {
+  width: 100%;
+  outline: none;
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: 1px solid #7a6480;
+}
+
+
+.tableRowBtn {
+  border: 2px solid white	;
+  background-color: #7a6480;
+  color: white	;
+  border-radius: 5px;
+  padding: 8px 8px;
+}
+
+.tableRowBtn:hover {
+    border: 2px solid #7a6480;
+    background-color: white;
+    color: 	#7a6480;
+    transform: scale(1.02);
+
+}
+.tableRowBtn:active {
+    background-color:#7a6480;
+    color: white;
+    transform: scale(0.9);
+    transition: ease-in-out 0.2s;
 }
 form {
-    width: 22rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,9 +103,10 @@ form {
     margin-block: 1rem;
     
 }
+
 form  input{
     margin-block: 0.5rem;
-    border: 2px solid#E6DCDF;
+    border: 2px solid #cbb3d1;
     padding: 0.5rem;
     border-radius: 8px;
     outline: none;
@@ -104,7 +146,7 @@ form div{
     width: 15rem;
     outline: none;
     border-radius: 8px;
-    border: 2px solid #E6DCDF;
+    border: 3px solid #cbb3d1;
     font-size: medium;
     color: gray;
     
@@ -117,11 +159,14 @@ form div{
     padding: 1rem;
     outline: none;
     border-radius: 8px;
-    border: 2px solid #E6DCDF;
-    background-color: white;
+    border: 2px solid white;
+    background-color: #7a6480;
     width: 15rem;
-    color: gray;
-    font-size: medium;
+    color: white;
+    font-size: large;
+}
+.submit {
+    width: 6rem !important;
 }
 .container{
     
@@ -130,4 +175,31 @@ form div{
     justify-content: center;
     align-items: center;
     padding: 1rem;
+}
+.submit {
+  border: 2px solid white	!important;
+  background-color: #7a6480 !important;
+  color: white !important	;
+  border-radius: 5px;
+  padding: 8px 8px;
+}
+
+.submit:hover {
+    border: 2px solid #7a6480 ;
+    background-color: white;
+    color: 	#7a6480;
+    transform: scale(1.02);
+
+}
+.submit:active {
+    background-color:#7a6480;
+    color: white;
+    transform: scale(0.9);
+    transition: ease-in-out 0.2s;
+}
+
+@media (max-width : 786px){
+    .tableContainer {
+        width: 100%;
+    }
 }

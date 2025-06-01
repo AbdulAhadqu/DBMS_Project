@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import clost_btn  from '../images/Vector.svg';
 import "../styles/modal.css";
 
-export default function Modal({children,title}) {
+export default function Modal({children,title }) {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
