@@ -9,9 +9,9 @@ app.use(express.json());
 
 const db = mysql.createConnection({
 host: 'localhost',
-user: 'root',
-password: 'Ahad@1814',
-database: 'ecommerce_db',
+user: '',
+password: '',
+database: '',
 timezone:'Z'
 });
 
