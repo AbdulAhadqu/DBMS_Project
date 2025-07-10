@@ -26,7 +26,7 @@ function AddNewRecord({element,primarykey,onSubmitToParent}) {
     function handleSubmit(e) {
   e.preventDefault();
   setdata(record);
-  setRecord()
+  setRecord({});
   // toggle ()
     }
 

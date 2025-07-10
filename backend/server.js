@@ -11,7 +11,7 @@ const db = mysql.createConnection({
 host: 'localhost',
 user: 'root',
 password: 'Ahad@1814',
-database: 'ecommerce_db',
+database: 'library',
 timezone:'Z'
 });
 
@@ -23,7 +23,9 @@ return;
 console.log('✅ Connected to MySQL database' );
 });
 
-
+app.get ('/', (req,res)=>{
+    res.send('hello world !!!')
+})
 
 app.get('/table', (req, res) => {
 const query =   `SHOW TABLES;`;
